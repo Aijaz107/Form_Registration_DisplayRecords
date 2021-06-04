@@ -1,0 +1,72 @@
+{% extends 'form_pos/base.html' %}
+{% block content %}
+
+
+<form action="{% url 'form_reg' %}" method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  <div class="container form-container">
+
+    <div class="form-info">
+      <p>Update Daily work report - On-time regular updates are a must.
+This summary will be considered for final evaluation & progress - only source to be considered for all WFH for attendance and work content post-approval daily.
+<br><br>
+ Also, keep sending your work snaps/recording in the group for immediate review.
+Approvals by lead within 2 days and by project manager within 7 days to be done else work will be left as unapproved.</p>
+    <a href="{% url 'form_reg' %}"><button type="button" class="reqBtn">View Existing Requests</button></a>
+    </div>
+    <div>
+      <span>NAME</span>
+      <input type="text" name="name" value="" required placeholder="Name" required>
+    </div>
+    <div>
+      <span>DATE</span>
+      <input type="date" name="date" placeholder="Date" required>
+    </div>
+    <div>
+      <span>REPORT TYPE</span>
+      <select name="type" required>
+        <option value="" hidden disabled selected>Type</option>
+        <option value="D">Daily</option>
+        <option value="W">Weekly</option>
+        <option value="M">Monthly</option>
+      </select>
+    </div>
+    <label>
+        <div>team</div>
+        <select>
+          {% for t in team_lead_list %}
+              <option value="{{ t }}">{{ t }}</option>
+          {% endfor %}
+        </select>
+      </label>
+    <div>
+      <span>NUMBER OF HOURS</span>
+      <input type="number" name="hours" placeholder="hours" required>
+    </div>
+    <div>
+      <span>TODAYS PROGRESS</span>
+      <textarea name="progress" placeholder="Progress" required></textarea>
+    </div>
+    <div>
+      <span>UPLOAD TODAYS DOCUMENTS(IF ANY)</span>
+      <input type="file" name="todays-docs" multiple>
+    </div>
+    <div>
+      <span>CONCERNS(IF ANY)</span>
+      <textarea name="concerns" placeholder="concerns"></textarea>
+    </div>
+    <div>
+      <span>NEXT PLAN</span>
+      <textarea name="next-plan" placeholder="Next Plan"></textarea>
+    </div>
+    <div>
+      <span>UPLOAD NEXT PLAN DOCUMENTS(IF ANY)</span>
+      <input type="file" name="next-docs" multiple>
+    </div>
+    <div class="submit-div">
+      <input type="submit" name="submit" value="Submit">
+    </div>
+  </div>
+</form>
+
+{% endblock %}
